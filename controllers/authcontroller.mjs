@@ -1,5 +1,6 @@
 import User from "../models/userModel.mjs";
 import bcrypt from "bcrypt";
+import createToken from "../utils/createToken.mjs";
 
 const createUser = async (req, res) => {
 
@@ -18,6 +19,7 @@ const createUser = async (req, res) => {
   const newUser = new User({ username, password: hashedPassword });
   try {
     await newUser.save();
+    createToken(res, newUser._id);
 
     return res.status(201).json({
       _id: newUser._id,
@@ -40,6 +42,7 @@ const loginUser = async (req, res) => {
     );
 
     if (isPasswordValid) {
+      createToken(res, existingUser._id);
 
       return res.status(200).json({
         _id: existingUser._id,
