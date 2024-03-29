@@ -1,7 +1,10 @@
 import app from "./app.mjs";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import dbConnect from "./utils/dbconnect.mjs";
 
-dotenv.config()
+dotenv.config();
+
+dbConnect();
 
 
 const port = process.env.PORT || 5000;
