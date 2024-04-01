@@ -12,7 +12,23 @@ const UserSchema = new mongoose.Schema({
     required: true,
     min: 8
   },
-  address: AddressSchema
+  profileImage: {
+    type: String,
+    required: true
+  },
+  rootSeed: {
+    type: String,
+    required: true
+  },
+  salt: {
+    type: String,
+    required: true
+  },
+  address: AddressSchema,
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const AddressSchema = new mongoose.Schema({
