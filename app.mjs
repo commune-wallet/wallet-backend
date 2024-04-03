@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: true, // Replace with your allowed origin(s)
+  origin: "*", // Replace with your allowed origin(s)
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Specify the HTTP methods allowed
   allowedHeaders: ["Content-Type", "Authorization"], // Specify the allowed request headers
   credentials: true, // Enable sending cookies across different domains
