@@ -5,7 +5,7 @@ import dbConnect from "./utils/dbconnect.mjs";
 dotenv.config();
 
 dbConnect();
-
+console.log('db')
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
