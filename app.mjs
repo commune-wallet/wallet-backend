@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "https://commune-wallet-rho.vercel.app/",
+  origin: "*",
 };
 
 app.use(cors(corsOptions));
