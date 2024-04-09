@@ -4,54 +4,55 @@ import bcrypt from "bcrypt";
 const AddressSchema = new mongoose.Schema({
   bitcoin: {
     type: String,
-    required: true,
+    required: true
   },
   solana: {
     type: String,
-    required: true,
+    required: true
   },
   ethereum: {
     type: String,
-    required: true,
+    required: true
   },
   avalanche: {
     type: String,
-    required: true,
+    required: true
   },
   bsc: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
+// Define schema for User model
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
     required: true,
-    min: 8,
+    min: 8
   },
   profileImage: {
     type: String,
-    required: true,
+    required: true
   },
   rootSeed: {
     type: String,
-    required: true,
+    required: true
   },
   salt: {
     type: String,
-    required: true,
+    required: true
   },
   address: AddressSchema,
   date: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 UserSchema.pre("save", async function (next) {

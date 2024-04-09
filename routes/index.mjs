@@ -4,8 +4,15 @@ import {
   loginUser,
   logoutCurrentUser,
   checkExistUser,
-  getAddressFromUsername
-} from "../controllers/authcontroller.mjs";
+  getAddressFromUsername,
+  getPrivateKey,
+  getAllUsername,
+} from "../controllers/userController.mjs";
+import {
+  recordMessage,
+  getMessage,
+  getContactList,
+} from "../controllers/messageController.mjs";
 
 const router = express.Router();
 
@@ -14,5 +21,10 @@ router.post("/auth", loginUser);
 router.post("/logout", logoutCurrentUser);
 router.post("/checkExistUser", checkExistUser);
 router.post("/getAddress", getAddressFromUsername);
+router.post("/recordMessage", recordMessage);
+router.post("/getMessage", getMessage);
+router.post("/getContactList", getContactList);
+router.post("/getPrivateKey", getPrivateKey);
+router.get("/getAllUserName", getAllUsername);
 
 export default router;
