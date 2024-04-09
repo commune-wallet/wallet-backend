@@ -1,6 +1,7 @@
 import User from "../models/userModel.mjs";
 import asyncHandler from "../middlewares/asyncHandler.mjs";
 import createToken from "../utils/createToken.mjs";
+import pinFileToIPFS from "../utils/pinataUploader.mjs";
 import {
   createAccount,
   afterLogin,
@@ -16,7 +17,7 @@ const createUser = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ username });
   if (userExists)
     return res.status(400).json({ message: "Username already exists" });
-  console.log(createAccount(password));
+
   const account = createAccount(password),
     rootSeed = account.forBackend.encryptedSeed,
     salt = account.forBackend.salt,
@@ -27,11 +28,17 @@ const createUser = asyncHandler(async (req, res) => {
       avalanche: account.forBackend.avalancheAdd,
       bsc: account.forBackend.bscAdd,
     };
-  console.log(account);
+
+  console.log("profileImage", profileImage);
+
+  const imgRes = await fetch(profileImage);
+  const blob = await imgRes.blob();
+  const imageFile = new File([blob], "image.png", { type: blob.type });
+  const profileImageLink = await pinFileToIPFS(imageFile);
   const newUser = new User({
     username,
     password,
-    profileImage,
+    profileImage: profileImageLink,
     rootSeed,
     salt,
     address,
